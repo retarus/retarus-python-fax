@@ -1,0 +1,7 @@
+retarus-common
+pytest
+aiohttp
+aiohttp-retry
+pydantic
+pytest-asyncio
+requests
