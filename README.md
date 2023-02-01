@@ -1,4 +1,4 @@
-## Retarus Python SDK
+## Retarus Python Fax SDK
 The official Python SDK provided by Retarus to contact our messaging services.
 
 ## Installation

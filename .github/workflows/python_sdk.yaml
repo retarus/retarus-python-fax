@@ -16,7 +16,7 @@ jobs:
       retarus_customer_number: ${{ secrets.CUSTOMER_NUMBER }}
     strategy:
       matrix:
-        python-version: ["3.8", "3.10"]
+        python-version: ["3.10"]
 
 
     steps:
@@ -34,12 +34,13 @@ jobs:
 
       - name: install packages
         run: |
-          pip install retarus-commons
           pip install .
 
       - name: Test with pytest
         run: |
           pytest tests/testing.py
+          pytest tests/test_fax_in_poll.py
+          pytest tests/test.py
 
   building:
     needs: testing
@@ -58,15 +59,15 @@ jobs:
           path: dist
           key: gh_action_retarus_sdk_python
 
-  deploy:
-    needs: building
-    if: github.ref == 'refs/heads/master'
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/cache@v3
-        with:
-          path: dist
-          key: gh_action_retarus_sdk_python
-      - uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.PIPY_API_TOKEN }}
+  # deploy:
+  #   needs: building
+  #   if: github.ref == 'refs/heads/master'
+  #   runs-on: ubuntu-22.04
+  #   steps:
+  #     - uses: actions/cache@v3
+  #       with:
+  #         path: dist
+  #         key: gh_action_retarus_sdk_python
+  #     - uses: pypa/gh-action-pypi-publish@release/v1
+  #       with:
+  #         password: ${{ secrets.PIPY_API_TOKEN }}

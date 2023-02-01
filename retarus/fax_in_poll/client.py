@@ -24,4 +24,4 @@ class FaxInPollClient(object):
         if self.is_async:
             self.client: Client = AsyncClient(download_path, page_size, timeout, self.__fax_in_poll_uris)
         else:
-            self.client: Client = SyncClient()
+            self.client: Client = SyncClient(download_path, page_size, timeout, self.__fax_in_poll_uris)

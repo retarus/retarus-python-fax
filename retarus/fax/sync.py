@@ -29,9 +29,9 @@ class SyncFaxClient(Client):
         res = self.loop.run_until_complete(self.client.delete_fax_report(job_id))
         return res
 
-    def bulk_operation(self, payload: BulkRequest):
-        res = self.loop.run_until_complete(self.client.bulk_operation(payload))
-        return res
+    # def bulk_operation(self, payload: BulkRequest):
+    #     res = self.loop.run_until_complete(self.client.bulk_operation(payload))
+    #     return res
 
     def delete_all_fax_reports(self):
         res = self.loop.run_until_complete(self.client.delete_all_fax_reports())

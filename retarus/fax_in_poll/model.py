@@ -12,7 +12,7 @@ class Client(object):
         self.page_size = page_size
         self.timeout = timeout
 
-    def fetch_fax_list(self, topic: str):
+    def fetch_fax_list(self, topic: str) -> List[dict]:
         """
         Requests a list of faxes that are hold under the given topic.
         """

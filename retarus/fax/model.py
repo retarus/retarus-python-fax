@@ -170,13 +170,13 @@ class Client(object):
         :return:
         """
 
-    def bulk_operation(self, payload: BulkRequest):
-        """
-        Get or Delete fax report with a list set of job ids, specify in your request the action type: ["GET", "DELETE"] and your required job ids along.
+    # def bulk_operation(self, payload: BulkRequest):
+    #     """
+    #     Get or Delete fax report with a list set of job ids, specify in your request the action type: ["GET", "DELETE"] and your required job ids along.
 
-        :param payload:
-        :return:
-        """
+    #     :param payload:
+    #     :return:
+    #     """
 
     def delete_all_fax_reports(self) -> list:
         """

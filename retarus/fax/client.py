@@ -1,6 +1,7 @@
 from typing import List
 
 from .sync import SyncFaxClient
+from .model import Client
 from ._async import AsyncClient
 from retarus.commons.region import Region, RegionUri
 
@@ -36,6 +37,6 @@ class FaxClient(object):
     def __init__(self, is_async: bool = False):
         self.is_async = is_async
         if is_async:
-            self.client = AsyncClient(self.__fax_uris)
+            self.client: Client = AsyncClient(self.__fax_uris)
         else:
-            self.client = SyncFaxClient(self.__fax_uris)
+            self.client: Client = SyncFaxClient(self.__fax_uris)

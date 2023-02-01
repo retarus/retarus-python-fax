@@ -6,11 +6,11 @@ from ._async import AsyncClient
 
 
 class SyncClient(Client):
-    def __init__(self, uris):
-        self.client = AsyncClient
+    def __init__(self, out_path: str, page_size: int, timeout: int, uris):
+        self.client = AsyncClient(out_path, page_size, timeout, uris)
         self.loop = asyncio.new_event_loop()
 
-    def fetch_fax_list(self, topic: str, ids: List[str] = None):
+    def fetch_fax_list(self, topic: str, ids: List[str] = None) -> List[dict]:
         res = self.loop.run_until_complete(self.client.fetch_fax_list(topic=topic, ids=ids))
         return res
 
