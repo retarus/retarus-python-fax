@@ -10,10 +10,15 @@ jobs:
   testing:
     runs-on: ubuntu-22.04
     env:
-      retarus_userid: ${{ secrets.TEST_USERID }}
-      retarus_fax_password: ${{ secrets.TEST_PASSWORD }}
-      retarus_sms_password: ${{ secrets.RETARUS_SMS_PASSWORD }}
-      retarus_customer_number: ${{ secrets.CUSTOMER_NUMBER }}
+      retarus_userid: ${{ secrets.RETARUS_USERID }}
+      retarus_fax_password: ${{ secrets.RETARUS_FAX_PASSWORD }}
+      retarus_customer_number: ${{ secrets.RETARUS_CUSTOMER_NUMBER }}
+      retarus_fax_number: ${{ secrets.RETARUS_FAX_NUMBER }}
+      topic: ${{ secrets.TOPIC }}
+      retarus_polling_user: ${{ secrets.RETARUS_POLLING_USER }}
+      retarus_polling_password: ${{ secrets.RETARUS_POLLING_PASSWORD }}
+      retarus_topic_user: ${{ secrets.RETARUS_TOPIC_USER }}
+      retarus_topic_password: ${{ secrets.RETARUS_TOPIC_PASSWORD }}
     strategy:
       matrix:
         python-version: ["3.10"]
