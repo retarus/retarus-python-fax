@@ -32,6 +32,7 @@ jobs:
         with:
           path: dist
           key: gh_action_retarus_sdk_python
-      - uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.PIPY_API_TOKEN }}
+      - name: install deps
+        run: pip install twine
+      - name: upload to pypi
+        run: python3 -m twine upload dist/*.tar.gz -u ${{secrets.PYPIUSERNAME}} -p ${{secrets.PYPIPASSWORD}}
