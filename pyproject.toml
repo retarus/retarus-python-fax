@@ -1,13 +1,12 @@
 [project]
 name = "retarus-fax"
 dynamic = ["readme", "dependencies"]
-version = "0.1.0"
+version = "1.0.0"
 requires-python = ">=3.8"
 license = {file = "LICENSE"}
 authors = [
     {name="Retarus GmbH", email = "Developers@retarus.com"},
 ]
-readme = "README.md"
 description= "The official client SDK for easy implementation of Retarus fax services."
 
 [project.urls]
@@ -16,7 +15,7 @@ repository = "https://github.com/retarus/retarus-python"
 
 [tool.setuptools.dynamic]
 #version = {file = "VERSION"}
-readme = {file = ["README.md"]}
+readme = {file = ["README.md"], content-type = "text/markdown"}
 dependencies = {file = "requirements.txt"}
 
 [build-system]
