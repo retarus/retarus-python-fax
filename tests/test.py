@@ -1,3 +1,4 @@
+import asyncio
 import pytest
 import os
 
@@ -36,8 +37,8 @@ async def test_send_fax_job():
 
 @pytest.mark.asyncio
 async def test_get_fax_report():
+    await asyncio.sleep(5)
     global test_job_id
-    init()
     res = await sdk.client.get_fax_report(test_job_id)
     print(res)
     assert isinstance(res, dict)
@@ -46,6 +47,7 @@ async def test_get_fax_report():
 
 @pytest.mark.asyncio
 async def test_get_fax_reports():
+    await asyncio.sleep(5)
     res = await sdk.client.get_fax_reports()
     assert isinstance(res, dict)
     assert "reports" in res
@@ -53,7 +55,7 @@ async def test_get_fax_reports():
 
 @pytest.mark.asyncio
 async def test_delete_fax_report():
-    init()
+    await asyncio.sleep(5)
     global test_job_id
     res = await sdk.client.delete_fax_report(test_job_id)
     assert res["jobId"] == test_job_id
