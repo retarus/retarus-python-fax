@@ -1,6 +1,7 @@
 [project]
 name = "retarus-fax"
-dynamic = ["readme", "dependencies"]
+keywords = ["retarus", "fax", "cloud"]
+dynamic = ["dependencies"]
 version = "1.0.0"
 requires-python = ">=3.8"
 license = {file = "LICENSE"}
@@ -9,8 +10,10 @@ authors = [
 ]
 description= "The official client SDK for easy implementation of Retarus fax services."
 readme = "README.md"
+
 [project.urls]
-repository = "https://github.com/retarus/retarus-python"
+repository = "https://github.com/retarus/retarus-python-fax"
+Documentation = "https://developers.retarus.com/"
 
 
 [tool.setuptools.dynamic]
