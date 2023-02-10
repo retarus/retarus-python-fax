@@ -5,7 +5,7 @@ The official Python Fax SDK provided by Retarus to contact our messaging service
 Install from PyPi using pip, a package manager for Python. Minimum python version 3.8.
 
 ```bash
-pip install retarus-python-fax
+pip install retarus-fax
 ```
 
 Or you can download the [source code for the Retarus python SDK](https://github.com/retarus/retarus-python-fax) and then build it with following command:
