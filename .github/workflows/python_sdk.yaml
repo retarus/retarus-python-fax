@@ -10,8 +10,8 @@ jobs:
   testing:
     runs-on: ubuntu-22.04
     env:
-      retarus_userid: ${{ secrets.RETARUS_USERID }}
-      retarus_fax_password: ${{ secrets.RETARUS_FAX_PASSWORD }}
+      retarus_userid: ${{ secrets.TEST_USERID }}
+      retarus_fax_password: ${{ secrets.TEST_PASSWORD }}
       retarus_sms_password: ${{ secrets.RETARUS_SMS_PASSWORD }}
       retarus_customer_number: ${{ secrets.CUSTOMER_NUMBER }}
     strategy:
@@ -59,15 +59,15 @@ jobs:
           path: dist
           key: gh_action_retarus_sdk_python
 
-  # deploy:
-  #   needs: building
-  #   if: github.ref == 'refs/heads/master'
-  #   runs-on: ubuntu-22.04
-  #   steps:
-  #     - uses: actions/cache@v3
-  #       with:
-  #         path: dist
-  #         key: gh_action_retarus_sdk_python
-  #     - uses: pypa/gh-action-pypi-publish@release/v1
-  #       with:
-  #         password: ${{ secrets.PIPY_API_TOKEN }}
+  deploy:
+    needs: building
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/cache@v3
+        with:
+          path: dist
+          key: gh_action_retarus_sdk_python
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PIPY_API_TOKEN }}

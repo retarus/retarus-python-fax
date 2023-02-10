@@ -11,7 +11,10 @@ class SyncFaxClient(Client):
 
     def __init__(self, uris):
         self.client = AsyncClient(uris)
-        self.loop = asyncio.new_event_loop()
+        try:
+            self.loop = asyncio.get_event_loop()
+        except:
+            self.loop = asyncio.new_event_loop()
 
     def send_fax_job(self, job: Job):
         res = self.loop.run_until_complete(self.client.send_fax_job(job))

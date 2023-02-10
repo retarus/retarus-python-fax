@@ -1,11 +1,11 @@
 import pytest
 import os
 import time
+import asyncio 
 
 from retarus.fax_in_poll.client import FaxInPollClient
 from retarus.commons.config import Configuration
-
-from setup import set_env
+from setup import send_fax_for_fip_tests, set_env
 
 # Unit test vaiables
 #set_env()
@@ -30,14 +30,17 @@ def test_create_sync_client():
     assert isinstance(sdk, FaxInPollClient)
 
 
-def test_send_syn_request():
+def test_send_sync_request():
     global sync
     Configuration.set_auth(os.environ["retarus_topic_user"], os.environ["retarus_topic_password"])
     res = sync.client.fetch_fax_list(TOPIC)
     assert isinstance(res, list)
 
+
 @pytest.mark.asyncio
 async def test_list_fax_jobs():
+    await send_fax_for_fip_tests()
+    await asyncio.sleep(60)
     global sdk
     global jobs
     Configuration.set_auth(os.environ["retarus_topic_user"], os.environ["retarus_topic_password"])

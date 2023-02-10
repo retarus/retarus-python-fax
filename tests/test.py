@@ -12,7 +12,8 @@ def init():
     Configuration.set_auth(os.environ["retarus_userid"], os.environ["retarus_fax_password"])
     Configuration.customer_number = os.environ["retarus_customer_number"]
 
-set_env()
+
+#set_env()
 init()
 
 # Test variables
