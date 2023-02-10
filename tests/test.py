@@ -35,6 +35,7 @@ async def test_send_fax_job():
     assert job_id != ""
 
 
+@pytest.mark.dependency("test_send_fax_job")
 @pytest.mark.asyncio
 async def test_get_fax_report():
     await asyncio.sleep(15)
@@ -45,6 +46,7 @@ async def test_get_fax_report():
     assert res["pages"] == 0
 
 
+@pytest.mark.dependency("test_send_fax_job")
 @pytest.mark.asyncio
 async def test_get_fax_reports():
     await asyncio.sleep(15)
@@ -53,6 +55,7 @@ async def test_get_fax_reports():
     assert "reports" in res
 
 
+@pytest.mark.dependency("test_send_fax_job")
 @pytest.mark.asyncio
 async def test_delete_fax_report():
     await asyncio.sleep(15)
