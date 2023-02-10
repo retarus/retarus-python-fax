@@ -46,7 +46,7 @@ async def test_get_fax_report():
     assert res["pages"] == 0
 
 
-@pytest.mark.dependency("test_send_fax_job")
+@pytest.mark.dependency("test_get_fax_report")
 @pytest.mark.asyncio
 async def test_get_fax_reports():
     await asyncio.sleep(15)
@@ -55,7 +55,7 @@ async def test_get_fax_reports():
     assert "reports" in res
 
 
-@pytest.mark.dependency("test_send_fax_job")
+@pytest.mark.dependency("test_get_fax_reports")
 @pytest.mark.asyncio
 async def test_delete_fax_report():
     await asyncio.sleep(15)
