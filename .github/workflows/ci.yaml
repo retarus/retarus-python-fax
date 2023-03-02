@@ -1,10 +1,10 @@
-name: retarus_sdk_python_fax_pipeline
+name: ci/cd
 
 on:
   push:
-    branches: [ master, dev ]
+    branches: [ main, master, dev ]
   pull_request:
-    branches: [ master, dev ]
+    branches: [ main, master, dev ]
 
 jobs:
   testing:
@@ -50,8 +50,16 @@ jobs:
   building:
     needs: testing
     runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python-version: ["3.8"]
     steps:
       - uses: actions/checkout@v1
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
       - name: install requirements
         run: pip install -r requirements.txt
 
@@ -59,7 +67,33 @@ jobs:
         run: |
          pip install build 
          python3 -m build --sdist --wheel --outdir dist/ .
-      - uses: actions/cache@v3
+      - uses: actions/upload-artifact@v2
         with:
           path: dist
-          key: gh_action_retarus_sdk_python
+          name: ci_python_fax
+
+  deploy:
+    if: github.ref == 'refs/heads/master'
+    env:
+      pypi: ${{ secrets.PIPY_API_TOKEN}}
+      pypi_user: ${{ secrets.PIPY_API_USER}}
+    needs: building
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: install twine
+        run: pip install twine
+      - run: mkdir -p  ~/download-art
+      - uses: actions/download-artifact@v2
+        with:
+          key: ci_python_fax
+          name: ci_python_fax
+          path: ~/download-art
+      
+      - name: upload artifacts
+        run: |
+          python3 -m twine upload -u $pypi_user -p $pypi ~/download-art/* --non-interactive --verbose
+          

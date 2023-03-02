@@ -14,7 +14,7 @@ class AsyncClient(Client):
     def __init__(self, out_path: str, page_size: int, timeout: int, url: List[RegionUri]):
         # checks if the specified [out_pat] ends with a slash so the name of the to save file can be appended
         if not out_path.endswith("/") and len(out_path) != 0:
-            out_path =+ "/"
+            out_path += "/"
         self.out_path = out_path
         self.page_size = page_size
         self.timeout = timeout

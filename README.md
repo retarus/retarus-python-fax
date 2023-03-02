@@ -11,7 +11,7 @@ pip install retarus-fax
 Or you can download the [source code for the Retarus python SDK](https://github.com/retarus/retarus-python-fax) and then build it with following command:
 ```bash
 git clone https://github.com/retarus/retarus-python-fax
-cd retarus-python
+cd retarus-python-fax
 pip install .
 ```
 
