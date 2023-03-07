@@ -67,33 +67,9 @@ jobs:
         run: |
          pip install build 
          python3 -m build --sdist --wheel --outdir dist/ .
+
+        if: github.ref == 'refs/heads/master'
       - uses: actions/upload-artifact@v2
         with:
           path: dist
-          name: ci_python_fax
-
-  deploy:
-    if: github.ref == 'refs/heads/master'
-    env:
-      pypi: ${{ secrets.PIPY_API_TOKEN}}
-      pypi_user: ${{ secrets.PIPY_API_USER}}
-    needs: building
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: install twine
-        run: pip install twine
-      - run: mkdir -p  ~/download-art
-      - uses: actions/download-artifact@v2
-        with:
-          key: ci_python_fax
-          name: ci_python_fax
-          path: ~/download-art
-      
-      - name: upload artifacts
-        run: |
-          python3 -m twine upload -u $pypi_user -p $pypi ~/download-art/* --non-interactive --verbose
-          
+          name: ${{ github.sha }}-ci_python_fax

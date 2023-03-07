@@ -1,0 +1,37 @@
+name: release
+
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  deploy:
+    env:
+      pypi: ${{ secrets.PIPY_API_TOKEN}}
+      pypi_user: ${{ secrets.PIPY_API_USER}}
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: install twine
+        run: | 
+          pip install twine wheel
+      - run: mkdir -p  /tmp/dist
+      - name: Download artifact
+        uses: dawidd6/action-download-artifact@v2.26.0
+        with:
+          github_token: ${{secrets.gh_token}}
+          workflow: ci.yaml
+          name: ${{ github.sha }}-ci_python_fax
+          path: /tmp/dist
+
+      - name: upload artifacts
+        run: |
+          python3 -m twine upload -u $pypi_user -p $pypi /tmp/dist/* --non-interactive --verbose
+        
+      - name: Create gh release
+        uses: softprops/action-gh-release@v1
